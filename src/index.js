@@ -16,7 +16,13 @@ dotenv.config();
 const app = express();
 console.log("Environment variables loaded");
 console.log("MONGO_URI:", process.env.MONGO_URI);
-app.use(cors());
+app.use(cors(
+  {
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }
+));
 app.use(express.json());
 
 app.get("/", (req, res) => {
