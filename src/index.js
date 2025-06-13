@@ -41,6 +41,8 @@ app.post("/api/upload",upload.single("file"), async (req, res) => {
   }
   try {
    
+    console.log("File received for upload:", req.file);
+    return res.status(200).json({ message: "File received successfully" });
     const result = await cloudinaryUpload(req.file.path);
     console.log("File uploaded to Cloudinary", result);
     res.json({ imageUrl: result.secure_url });
