@@ -16,7 +16,7 @@ export const getNoteById = async (req, res) => {
 };
 
 export const createNote = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content,imageUrl,tags } = req.body;
   if (!title || !content) {
     return res.status(400).json({ message: "Title and content are required" });
   }
@@ -24,6 +24,8 @@ export const createNote = async (req, res) => {
     title,
     content,
     user: req.user._id,
+    imageUrl,
+    tags: tags ,
   });
   res.status(201).json(note);
 };
@@ -38,6 +40,8 @@ const _id= id;
 
   note.title = req.body.title || note.title;
   note.content = req.body.content || note.content;
+  note.imageUrl = req.body.imageUrl || note.imageUrl;
+  note.tags = req.body.tags || note.tags;
   const updated = await note.save();
   res.json(updated);
 };
